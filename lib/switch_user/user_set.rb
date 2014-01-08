@@ -44,14 +44,9 @@ module SwitchUser
 
     def normalize_scope(scope)
       if scope.respond_to?(:call)
-        scoped = scope.call
-        if scoped.respond_to?(:scoped)
-          scoped
-        else
-          user_class.scoped
-        end
+        scope.call
       else
-        user_class.scoped
+        user_class.all
       end
     end
     class Record < Struct.new(:id, :label, :scope)
